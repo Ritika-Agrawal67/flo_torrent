@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="components.js"></script>
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: sans-serif;
+      }
+
+      .card {
+        width: 250px;
+        height: 330px;
+        background: #fffdf6;
+        box-shadow: 0px 3px 2px 1px #eee;
+        border-radius: 0 0 15px 15px;
+        position: relative;
+      }
+
+      .card:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 40%;
+        border-radius: 50%/0 0 50px 50px;
+        background: radial-gradient(
+          50% 90% at bottom,
+          rgba(43, 58, 103, 0.75),
+          rgba(43, 58, 103, 0.85),
+          rgb(43, 58, 103)
+        );
+      }
+
+      .card-header {
+        height: 110px;
+      }
+
+      .icon {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background-color: #fff;
+        border: 5px solid rgb(43, 58, 103);
+        margin: -17% 35%;
+        z-index: 2;
+      }
+      svg {
+        width: 90%;
+        color: rgb(43, 58, 103);
+      }
+
+      h2 {
+        color: rgb(43, 58, 103);
+      }
+
+      .main-heading {
+        color: #fff;
+        position: absolute;
+        margin-top: 2em;
+      }
+
+      .main-heading,
+      h4,
+      .torrent-uploader {
+        text-align: center;
+      }
+
+      h4 {
+        margin-top: 2em;
+        padding: 0 10px;
+        opacity: 0.8;
+      }
+
+      p {
+        margin: 0 auto;
+        width: 75%;
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      .torrent-uploader {
+        word-break: break-all;
+      }
+
+      #myBtn {
+        background: transparent;
+        border: none;
+        margin-top: 0.5em;
+        margin-left: 35%;
+        color: rgb(43, 58, 103);
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section h2 {
+        text-align: center;
+      }
+
+      .movie-content {
+        width: 100%;
+        background: #2ab7ca;
+        padding: 20px;
+        margin-right: -2px;
+      }
+
+      .movie-content p {
+        margin-top: 1em;
+        opacity: 1;
+      }
+
+      .movie-content .smaller {
+        opacity: 0.7;
+        width: 90%;
+      }
+
+      .description {
+        color: #fff;
+        font-size: 16px;
+        width: 90%;
+      }
+
+      .left-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .download {
+        color: #fff;
+        width: 80%;
+        height: 30px;
+        border-radius: 50px;
+        background: rgb(43, 58, 103);
+        margin-left: 10%;
+        margin-top: 1em;
+      }
+
+      section .download {
+        border: none;
+        margin-top: 3rem;
+        font-size: 17px;
+        margin-left: 0;
+      }
+
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 5; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        /* padding: 20px; */
+        border: 1px solid #888;
+        width: 40%; /* Could be more or less, depending on screen size */
+        position: relative;
+      }
+
+      /* The Close Button */
+      .close {
+        position: absolute;
+        color: rgb(43, 58, 103);
+        font-size: 28px;
+        font-weight: bold;
+        margin-left: 95%;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">
+        <div class="icon">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="film"
+            class="svg-inline--fa fa-film fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="currentColor"
+              d="M488 64h-8v20c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12V64H96v20c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12V64h-8C10.7 
+    64 0 74.7 0 88v336c0 13.3 10.7 24 24 24h8v-20c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v20h320v-20c0-6.6 5.4-12 12-12h40c6.6 
+    0 12 5.4 12 12v20h8c13.3 0 24-10.7 24-24V88c0-13.3-10.7-24-24-24zM96 372c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 
+    5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 
+    12 12v40zm0-96c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm272 208c0 6.6-5.4 
+    12-12 12H156c-6.6 0-12-5.4-12-12v-96c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v96zm0-168c0 6.6-5.4 12-12 
+    12H156c-6.6 0-12-5.4-12-12v-96c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v96zm112 152c0 6.6-5.4 12-12 12h-40c-6.6 
+    0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 
+    5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 
+    5.4 12 12v40z"
+            ></path>
+          </svg>
+        </div>
+
+        <h2 class="main-heading">The Hundred-Foot Journey</h2>
+      </div>
+
+      <h4>Genre : Action / Comedy / Drama</h4>
+
+      <p class="torrent-uploader">
+        -by- <br />
+        FDcV3Xn4F51K91WozakaKdaVrGBBf7BSfw
+      </p>
+
+      <button class="download">Download</button>
+
+      <button id="myBtn">read more</button>
+    </div>
+
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <section>
+          <div class="left-block">
+            <h2>The Hundred-Foot Journey</h2>
+            <button class="download">Download</button>
+          </div>
+          <div class="movie-content">
+            <p class="description">
+              The family of talented cook, Hassan Kadam, has a life filled with
+              both culinary delights and profound loss. Drifting through Europe
+              after fleeing political violence in India that killed the family
+              restaurant business and their mother, the Kadams arrive in France.
+            </p>
+
+            <p class="smaller">Genre : Action / Comedy / Drama</p>
+
+            <p class="smaller">Uploader : FDcV3Xn4F51K91WozakaKdaVrGBBf7BSfw</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on the button, open the modal
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
